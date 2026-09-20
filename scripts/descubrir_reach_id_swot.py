@@ -33,9 +33,9 @@ LON_ESTACION = -73.855
 # Radio de búsqueda en grados (~0.5° ≈ 55 km)
 RADIO_BUSQUEDA = 0.5
 
-# Credenciales Earthdata
-USER = "FrailN"
-PASSWORD = "SIG2024grupo2*"
+# Credenciales Earthdata (configurar via variables de entorno o archivo .env)
+USER = os.environ.get("EARTHDATA_USERNAME", "")
+PASSWORD = os.environ.get("EARTHDATA_PASSWORD", "")
 
 # Collection IDs SWOT RiverSP (Version D - más reciente)
 COLLECTION_REACH_D = "C3233942283-POCLOUD"  # Reach only, Version D

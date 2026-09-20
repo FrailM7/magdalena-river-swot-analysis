@@ -149,7 +149,10 @@ def descubrir_reach_ids_cmr():
         if not os.path.exists(fname):
             print(f"   ⬇️ Descargando gránulo de muestra...")
             session = requests.Session()
-            session.auth = ("FrailN", "SIG2024grupo2*")
+            user = os.environ.get("EARTHDATA_USERNAME", "")
+            password = os.environ.get("EARTHDATA_PASSWORD", "")
+            if user and password:
+                session.auth = (user, password)
             resp = session.get(zip_url, allow_redirects=True)
             if resp.status_code != 200:
                 print(f"   ⚠️ Error {resp.status_code} descargando. Necesitas credenciales Earthdata.")

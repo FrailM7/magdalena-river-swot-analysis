@@ -17,18 +17,20 @@ Este proyecto analiza la conectividad hidraulica entre el Rio Magdalena y sus co
 pip install pandas numpy matplotlib geopandas
 ```
 
-### Estructura
-```
-proyecto_tesis_magdalena/
 ├── data/
-│   ├── raw/          # Datos crudos
-│   └── processed/    # Datos procesados
+│   ├── raw/                         # Datos crudos (descargaDhime.csv, SWOT_lvl_h2o_barrancabermeja.csv)
+│   └── processed/                   # Datos procesados y figuras PNG
 ├── notebooks/
-│   └── 01_exploracion_ideam.ipynb   # Notebook principal
+│   └── 01_exploracion_ideam.ipynb  # Notebook principal de exploracion
 ├── scripts/
-│   └── mi_tesis_utils.py            # Funciones reutilizables
-└── docs/
-    └── notas.md                     # Notas y documentacion
+│   ├── mi_tesis_utils.py            # Funciones reutilizables y metricas de conectividad
+│   ├── analisis_nivel_barrancabermeja.py # Analisis historico in-situ IDEAM y El Niño
+│   ├── descubrir_reach_id_swot.py   # Descubrimiento espacial de tramos SWORD
+│   ├── Descarga SWOT.py             # Descarga de series WSE via API Hydrocron
+│   └── analisis_swot_barrancabermeja.py # Comparativa IDEAM vs SWOT y correlacion ENSO
+├── docs/
+│   └── notas.md                     # Notas y documentacion
+└── .env.example                     # Plantilla de variables de entorno
 ```
 
 ### Uso

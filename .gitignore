@@ -29,14 +29,10 @@ MANIFEST
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
-# Environments
+# Environments & Secrets
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+.netrc
+*.log
 
 # SWOT downloaded data & temporary extractions
 swot_data/
