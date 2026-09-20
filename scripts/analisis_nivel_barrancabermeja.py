@@ -24,9 +24,9 @@ import matplotlib.pyplot as plt
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 
-# Agregar scripts/ al path para importar mi_tesis_utils
+# Agregar scripts/ al path para importar magdalena_utils
 sys.path.insert(0, SCRIPT_DIR)
-from mi_tesis_utils import cm_a_metros, plot_nivel_diario, plot_nivel_mensual
+from magdalena_utils import cm_a_metros, plot_nivel_diario, plot_nivel_mensual
 
 # ---------- Rutas de archivos ----------
 RUTA_CSV = os.path.join(PROJECT_DIR, "data", "raw", "descargaDhime.csv")

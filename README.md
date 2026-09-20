@@ -1,32 +1,33 @@
-# 🌊 Análisis Hidrológico y Teledetección Satelital: Río Magdalena (Barrancabermeja)
-### *Monitoreo del nivel del agua, conectividad ecohidrológica e impacto de El Niño mediante IDEAM y la misión SWOT (NASA/CNES)*
+# 🌊 Análisis Hidrológico y Teledetección Satelital: Río Magdalena
+### *Monitoreo del nivel del agua, conectividad ecohidrológica e impacto de El Niño mediante estaciones IDEAM y la misión SWOT (NASA/CNES)*
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![NASA SWOT](https://img.shields.io/badge/NASA-SWOT%20Mission-red.svg?logo=nasa&logoColor=white)](https://swot.jpl.nasa.gov/)
 [![IDEAM](https://img.shields.io/badge/IDEAM-DHIME%20Colombia-green.svg)](http://dhime.ideam.gov.co/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-magdalena--river--swot--analysis-181717.svg?logo=github&logoColor=white)](https://github.com/FrailM7/magdalena-river-swot-analysis)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
 ## 📌 Descripción del Proyecto
 
-Este repositorio contiene un pipeline completo en Python diseñado para **integrar, procesar y comparar datos hidrológicos in-situ con altimetría satelital de última generación**. 
+Este repositorio contiene un flujo de trabajo completo en Python diseñado para **integrar, procesar y contrastar datos hidrológicos in-situ con altimetría satelital de última generación**.
 
-El caso de estudio se centra en el **Río Magdalena** en la estación limnigráfica de **Barrancabermeja [23157030]** (Santander, Colombia), evaluando la respuesta hidrológica del río y su conectividad con caños y humedales ante eventos climáticos extremos como el fenómeno de **El Niño (2023–2024)**.
+El caso de estudio se enfoca en el **Río Magdalena** a la altura de la estación limnigráfica de **Barrancabermeja [23157030]** (Santander, Colombia), evaluando la respuesta hidrológica del cauce principal y su conectividad con caños y humedales ante eventos climáticos extremos como el fenómeno de **El Niño (2023–2024)**.
 
 ### 🎯 Objetivos Principales
-1. **Línea base histórica in-situ:** Procesar más de una década (2014–2024) de registros diarios oficiales del IDEAM (DHIME).
-2. **Adquisición satelital optimizada:** Descargar series temporales de elevación de la lámina de agua (**WSE**), ancho y pendiente fluvial del satélite **SWOT (Surface Water and Ocean Topography)** mediante la **API Hydrocron** de PO.DAAC / NASA Earthdata Cloud.
-3. **Harmonización de datums:** Contrastar mediciones referidas al cero de la mira local con cotas absolutas respecto al geoide EGM2008 / elipsoide WGS84.
-4. **Conectividad ecohidrológica:** Evaluar la relación hidráulica entre el cauce principal y los complejos cenagosos adyacentes según umbrales de cota de fondo (`z_fondo`).
-5. **Replicabilidad global:** Servir de plantilla modular para que investigadores y profesionales apliquen este mismo análisis a **cualquier cuenca hidrográfica del mundo**.
+1. **Línea base histórica in-situ:** Procesar y analizar más de una década (2014–2024) de registros diarios continuos del IDEAM (DHIME).
+2. **Adquisición satelital optimizada:** Extraer series temporales de elevación de la lámina de agua (**WSE** - *Water Surface Elevation*), ancho de espejo de agua y pendiente fluvial del satélite **SWOT (Surface Water and Ocean Topography)** mediante la **API Hydrocron** de PO.DAAC / NASA Earthdata Cloud.
+3. **Armonización de datums:** Contrastar mediciones in-situ referidas al cero local de mira (cota relativa) con elevaciones absolutas del satélite respecto al geoide EGM2008 / elipsoide WGS84.
+4. **Conectividad ecohidrológica:** Evaluar la relación hidráulica entre el río y los complejos cenagosos adyacentes según umbrales de cota de fondo (`z_fondo`).
+5. **Replicabilidad global:** Ofrecer una arquitectura modular para que investigadores y profesionales apliquen este mismo análisis a **cualquier cuenca hidrográfica del planeta**.
 
 ---
 
 ## 🏗️ Estructura del Repositorio
 
 ```text
-proyecto_tesis_magdalena/
+magdalena-river-swot-analysis/
 ├── data/
 │   ├── raw/                                     # Datos brutos (fuentes oficiales)
 │   │   ├── descargaDhime.csv                    # Serie diaria IDEAM (2014-2024, cm)
@@ -40,15 +41,15 @@ proyecto_tesis_magdalena/
 │       ├── promedios_mensuales_por_anio.xlsx
 │       └── swot_promedios_mensuales_por_anio.xlsx
 ├── scripts/                                     # Módulos y scripts ejecutables
-│   ├── mi_tesis_utils.py                        # Funciones comunes (ETL, calidad, conectividad)
-│   ├── analisis_nivel_barrancabermeja.py        # Análisis de series históricas IDEAM
+│   ├── magdalena_utils.py                       # Funciones comunes (ETL, calidad, conectividad)
+│   ├── analisis_nivel_barrancabermeja.py        # Análisis de series históricas in-situ IDEAM
 │   ├── descubrir_reach_id_swot.py               # Descubrimiento espacial de tramos SWORD
 │   ├── Descarga SWOT.py                         # Descarga automatizada vía API Hydrocron
 │   └── analisis_swot_barrancabermeja.py         # Comparativa IDEAM vs SWOT y correlación ENSO
 ├── notebooks/
 │   └── 01_exploracion_ideam.ipynb               # Cuaderno interactivo de exploración
 ├── docs/
-│   └── notas.md                                 # Apuntes metodológicos y notas de campo
+│   └── notas.md                                 # Apuntes metodológicos y notas técnicas
 ├── .env.example                                 # Plantilla para credenciales seguras
 ├── .gitignore                                   # Configuración de exclusión de Git
 └── README.md                                    # Documentación principal
@@ -60,11 +61,11 @@ proyecto_tesis_magdalena/
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/FrailM7/Tesis-Barrancabermeja-.git
-cd Tesis-Barrancabermeja-
+git clone https://github.com/FrailM7/magdalena-river-swot-analysis.git
+cd magdalena-river-swot-analysis
 ```
 
-### 2. Crear un entorno virtual (recomendado)
+### 2. Crear y activar un entorno virtual (recomendado)
 ```bash
 python -m venv env
 # En Windows:
@@ -73,18 +74,18 @@ env\Scripts\activate
 source env/bin/activate
 ```
 
-### 3. Instalar librerías necesarias
+### 3. Instalar dependencias
 ```bash
 pip install pandas numpy matplotlib openpyxl requests geopandas shapely
 ```
 
 ### 4. Configurar variables de entorno (Opcional)
-Para la búsqueda espacial de tramos mediante la API CMR de NASA Earthdata, copia el archivo de plantilla:
+Para el descubrimiento espacial mediante la API CMR de NASA Earthdata, copia la plantilla:
 ```bash
 copy .env.example .env   # En Windows
 cp .env.example .env     # En Linux/macOS
 ```
-Edita `.env` con tus credenciales de [NASA Earthdata](https://urs.earthdata.nasa.gov/). *(Nota: La descarga vía Hydrocron no requiere credenciales para endpoints públicos).*
+Edita `.env` con tus credenciales de [NASA Earthdata](https://urs.earthdata.nasa.gov/). *(Nota: La descarga directa vía API Hydrocron no requiere credenciales para endpoints públicos).*
 
 ---
 
@@ -104,7 +105,7 @@ python scripts/analisis_nivel_barrancabermeja.py
 python scripts/descubrir_reach_id_swot.py
 ```
 - Conecta a la API CMR de NASA Earthdata.
-- Filtra tramos de la base **SWORD** (*SWOT River Database*) por proximidad geográfica a las coordenadas de la estación (7.065°N, -73.855°W).
+- Filtra tramos de la base global **SWORD** (*SWOT River Database*) por proximidad geográfica a las coordenadas de la estación (7.065°N, -73.855°W).
 - Retorna los `reach_id` más cercanos (ej. `61209100051`, `61209100031`).
 
 ### Paso 3: Descarga Automatizada de Datos SWOT (Hydrocron API)
@@ -113,7 +114,7 @@ python "scripts/Descarga SWOT.py"
 ```
 - Consulta la **API REST Hydrocron** de PO.DAAC para los tramos definidos.
 - Extrae variables hidrológicas:
-  - `wse`: Elevación de la superficie del agua (Water Surface Elevation, m).
+  - `wse`: Elevación de la superficie del agua (*Water Surface Elevation*, m).
   - `wse_u`: Incertidumbre de medición de WSE (m).
   - `width`: Ancho del espejo de agua (m).
   - `slope`: Pendiente de la lámina de agua.
@@ -131,9 +132,9 @@ python scripts/analisis_swot_barrancabermeja.py
 
 ---
 
-## 🧩 Módulo de Utilidades (`scripts/mi_tesis_utils.py`)
+## 🧩 Módulo de Utilidades (`scripts/magdalena_utils.py`)
 
-El módulo `mi_tesis_utils.py` contiene funciones modulares reutilizables:
+El módulo `magdalena_utils.py` contiene funciones modulares y reutilizables:
 
 | Función | Descripción |
 | :--- | :--- |
@@ -161,9 +162,9 @@ El diseño del algoritmo es **100% modular y agnóstico a la ubicación**:
 ## 📊 Resultados Visuales
 
 El repositorio genera automáticamente visualizaciones listas para publicación:
-- **`comparativa_ideam_vs_swot_barrancabermeja.png`:** Validación visual del satélite SWOT frente a los sensores en tierra.
+- **`comparativa_ideam_vs_swot_barrancabermeja.png`:** Validación visual del satélite SWOT frente a los sensores en tierra con doble eje.
 - **`nivel_diario_barrancabermeja.png` / `swot_wse_diario_barrancabermeja.png`:** Series temporales completas con bandas de incertidumbre y fases de El Niño sombreadas.
-- **`swot_promedios_mensuales_por_anio.xlsx`:** Matrices multianuales para modelación y calibración hidrodinámica.
+- **`promedios_mensuales_por_anio.xlsx` / `swot_promedios_mensuales_por_anio.xlsx`:** Matrices multianuales para modelación y calibración hidrodinámica.
 
 ---
 
@@ -172,5 +173,5 @@ El repositorio genera automáticamente visualizaciones listas para publicación:
 Las contribuciones, sugerencias y mejoras son bienvenidas. Si encuentras algún problema o deseas proponer una nueva funcionalidad, no dudes en abrir un *Issue* o enviar un *Pull Request*.
 
 - **Autor:** Nicolás (@FrailM7)
-- **Proyecto:** Tesis de Grado - Conectividad Hidráulica del Río Magdalena y Teledetección Satelital.
-- **Repositorio:** [https://github.com/FrailM7/Tesis-Barrancabermeja-](https://github.com/FrailM7/Tesis-Barrancabermeja-)
+- **Repositorio:** [https://github.com/FrailM7/magdalena-river-swot-analysis](https://github.com/FrailM7/magdalena-river-swot-analysis)
+- **Licencia:** MIT

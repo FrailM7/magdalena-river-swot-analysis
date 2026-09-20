@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-mi_tesis_utils.py
-Funciones reutilizables para el proyecto de tesis.
-Guarda este archivo en la carpeta /scripts/
+magdalena_utils.py
+Funciones reutilizables para el análisis hidrológico, conectividad
+ecohidrológica y procesamiento de datos del Río Magdalena.
 """
 
 import pandas as pd
