@@ -14,7 +14,6 @@ Este script:
      y la exporta a Excel y CSV en data/processed/
 """
 
-from IPython.utils import data
 import os
 import sys
 import pandas as pd
@@ -284,5 +283,5 @@ def main():
 
 if __name__ == "__main__":
     df_resultado = main()
-
-print(data.pd.head())
+    print("\nPrimeras filas del DataFrame resultante:")
+    print(df_resultado.head())
